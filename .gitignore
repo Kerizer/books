@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# This key should be saved in backend service or I should add restrictions in Google's settings
+# But this is not a real project but just a sandbox for playing with react, so I just hide them like this
+api_key.js
