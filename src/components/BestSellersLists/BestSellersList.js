@@ -1,19 +1,15 @@
 import React from 'react';
 
 class BestSellersList extends React.Component {
-	constructor(props) {
-		super(props);
-		
-		this.loadLists = this.loadLists.bind(this);	
-	}
-
-	loadLists() {
+	componentDidMount() {
 		this.props.getBestSellersList();
 	}
 
 	render() {
 		return <div>
-			<button onClick={this.loadLists}>Load</button>
+			{this.props.bestSellersLists.map(item => <div key={item.list_name_encoded}>
+				<h5>{item.display_name}</h5>
+			</div>)}
 		</div>
 	}
 }

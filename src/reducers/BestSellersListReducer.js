@@ -9,7 +9,7 @@ function BestSellersLists(state = initialState, data) {
 		case bestSellersListActionTypes.request:
 			return {...state}
 		case bestSellersListActionTypes.success:
-			return {...state, list: data.results}
+			return {...state, lists: data.results}
 		default:
 			return state;
 	}

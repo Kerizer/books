@@ -16,16 +16,11 @@ const bestSellersListFailure = (error) => ({
 
 export function getBestSellersList() {
 	// return bestSellersListSuccess({results: [0, 1]});
-	return async dispatch => {
+	return dispatch => {
 		dispatch(bestSellersListRequest());
-		try {
-			let data = await fetch("https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=XlPHGXLfDmGcZKZCOK5RhuGWiARgbGWe");
-			dispatch(bestSellersListSuccess(data.json()));
-		} catch(error) {
-			dispatch(bestSellersListFailure(error));
-		}
-		// fetch("https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=XlPHGXLfDmGcZKZCOK5RhuGWiARgbGWe")
-		// 	.then(data => data.json())
-		// 	.then(data => dispatch(bestSellersListSuccess(data)));
+		fetch("https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=XlPHGXLfDmGcZKZCOK5RhuGWiARgbGWe")
+			.then(data => data.json())
+			.then(data => dispatch(bestSellersListSuccess(data)))
+			.catch(e => dispatch(bestSellersListFailure(e)));
 	}
 };
