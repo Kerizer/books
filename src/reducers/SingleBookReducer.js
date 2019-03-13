@@ -11,7 +11,7 @@ function BestSellersLists(state = initialState, data) {
 		case singleBookActions.failure:
 			return {...state, isLoading: false}
 		case singleBookActions.success:
-			return {...state, books:{...state.books, ...{[data.isbn]:data.results ? data.results[0] : {error:"NotFound"} }}, isLoading: false}
+			return {...state, books:{...state.books, ...{[data.isbn]:data.result ? data.result : {error:"NotFound"} }}, isLoading: false}
 		default:
 			return state;
 	}

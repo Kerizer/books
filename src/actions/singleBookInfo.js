@@ -6,7 +6,7 @@ const bookInfoRequest = () => ({
 
 const bookInfoSuccess = (isbn, data) => ({
 	type: singleBookActions.success,
-	results: data.items,
+	result: data,
 	isbn
 });
 
@@ -20,13 +20,15 @@ export function getBookInfo(isbn) {
 		dispatch(bookInfoRequest());
 		// NYT give no possibility to fetch info about single book, using googleapis here
 		try {
-			let response = await api.get(`https://www.googleapis.com/books/v1/volumes`, {
+			let response = await api.get(`https://openlibrary.org/api/books`, {
 				params: {
-					q:`isbn:${isbn}`
+					format:'json',
+					jscmd:'data',
+					bibkeys:`ISBN${isbn}`,
 				}
 			});
 			if (response.status === 200) {
-				dispatch(bookInfoSuccess(isbn, response.data));
+				dispatch(bookInfoSuccess(isbn, response.data[`ISBN${isbn}`]));
 			} else {
 				dispatch(bookInfoFailure());
 			}

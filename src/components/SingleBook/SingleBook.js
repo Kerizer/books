@@ -18,8 +18,8 @@ class SingleBook extends React.Component {
 		return <div>
 
 			<div>
-				<img src={bookInfo.volumeInfo.imageLinks.thumbnail} alt="Book thumbnail" />
-				<h4>{bookInfo.volumeInfo.title}</h4>
+				<img src={bookInfo.cover && bookInfo.cover.large} alt="Book thumbnail" />
+				<h4>{bookInfo.title}</h4>
 			</div>
 			<div>
 				Reviews: {reviews && reviews.map(review => <div key={review.uuid}>
