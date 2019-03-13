@@ -53,7 +53,7 @@ class BookThumbnail extends React.Component {
 					<BookTitle>{this.props.title}</BookTitle>
 					<BookDescription>{this.props.description}</BookDescription>
 					<BookActions>
-						<MoreLink to="">More</MoreLink>
+						<MoreLink to={`/book/${this.props.primary_isbn13}`}>More</MoreLink>
 						<BuyBookLink href={this.props.amazon_product_url} target="_blank">Buy on Amazon</BuyBookLink>
 					</BookActions>
 				</div>

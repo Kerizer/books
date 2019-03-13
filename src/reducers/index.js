@@ -1,5 +1,9 @@
 import BestSellersLists from './BestSellersListsReducer';
+import Reviews from './ReviewsReducer';
+import SingleBook from './SingleBookReducer';
 
 export default {
-	BestSellersLists
+	BestSellersLists,
+	Reviews,
+	SingleBook,
 }

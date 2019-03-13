@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import BestSellersList from './components/BestSellersLists';
 import SingleBestSellersList from './components/SingleBestSellersList';
+import SingleBook from './components/SingleBook';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components'
 
@@ -20,6 +21,7 @@ class App extends Component {
 					<Header />
 					<Route path="/" exact component={BestSellersList} />
 					<Route path="/list/:listNameEncoded" component={SingleBestSellersList} />
+					<Route path="/book/:isbn" component={SingleBook} />
 				</div>
 			</Router>
 		</div>
