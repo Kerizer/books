@@ -9,11 +9,18 @@ class SingleBook extends React.Component {
 
 	render() {
 		let {reviews, bookInfo} = this.props;
-		if (!bookInfo && !this.props.isLoading) {
-			return <div>Can't find info about book with isbn {this.props.match.params.isbn} on Google Books</div>
+		if (!bookInfo) {
+			return <div>Loading</div>
 		}
+		if (bookInfo.error === "NotFound") {
+			return <div>Can't find info about book with isbn {this.props.match.params.isbn} on Google Books</div>
+		} 
 		return <div>
 
+			<div>
+				<img src={bookInfo.volumeInfo.imageLinks.thumbnail} alt="Book thumbnail" />
+				<h4>{bookInfo.volumeInfo.title}</h4>
+			</div>
 			<div>
 				Reviews: {reviews && reviews.map(review => <div key={review.uuid}>
 					<span>{review.byline}({review.publication_dt}): {review.summary}</span>
