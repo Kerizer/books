@@ -15,12 +15,14 @@ const bestSellersListFailure = (error) => ({
 });
 
 export function getBestSellersList() {
-	// return bestSellersListSuccess({results: [0, 1]});
-	return dispatch => {
+	return async (dispatch, getState, api) => {
 		dispatch(bestSellersListRequest());
-		fetch("https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=XlPHGXLfDmGcZKZCOK5RhuGWiARgbGWe")
-			.then(data => data.json())
-			.then(data => dispatch(bestSellersListSuccess(data)))
-			.catch(e => dispatch(bestSellersListFailure(e)));
+		let response = await api.get("lists/names.json");
+		if (response.status === 200 && response.statusText === "OK") {
+			dispatch(bestSellersListSuccess(response.data));
+		} else {
+			dispatch(bestSellersListFailure());
+		}
+
 	}
 };
