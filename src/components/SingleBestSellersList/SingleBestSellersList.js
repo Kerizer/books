@@ -1,5 +1,12 @@
 import React from 'react';
+import BookThumbnail from './../BookThumbnail';
+import styled from 'styled-components/macro';
 // import { Link } from 'react-router-dom';
+
+const BooksThumbnailContainer = styled.div`
+	display:flex;
+	flex-wrap: wrap;
+`;
 
 class SingleBestSellersList extends React.Component {
 	componentDidMount() {
@@ -13,10 +20,9 @@ class SingleBestSellersList extends React.Component {
 		}
 		return <div>
 			<h3>{listInfo.display_name}</h3>
-			{listInfo.books.map(book => <div key={book.primary_isbn13}>
-				<h4>{book.title}</h4>
-				<p>{book.description}</p>
-			</div>)}
+			<BooksThumbnailContainer>
+				{listInfo.books.map(book => <BookThumbnail {...book} key={book.primary_isbn13} />)}
+			</BooksThumbnailContainer>
 		</div>
 	}
 }
