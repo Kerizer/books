@@ -1,4 +1,4 @@
-import BestSellersLists from './BestSellersListReducer';
+import BestSellersLists from './BestSellersListsReducer';
 
 export default {
 	BestSellersLists

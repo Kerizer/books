@@ -1,16 +1,16 @@
-import { bestSellersListActionTypes } from './actionTypes';
+import { bestSellersListsActionTypes } from './actionTypes';
 
 const bestSellersListRequest = () => ({
-	type: bestSellersListActionTypes.request,
+	type: bestSellersListsActionTypes.request,
 });
 
 const bestSellersListSuccess = data => ({
-	type: bestSellersListActionTypes.success,
+	type: bestSellersListsActionTypes.success,
 	results: data.results
 });
 
 const bestSellersListFailure = (error) => ({
-	type: bestSellersListActionTypes.failure,
+	type: bestSellersListsActionTypes.failure,
 	error
 });
 

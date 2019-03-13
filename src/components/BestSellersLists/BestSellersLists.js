@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class BestSellersList extends React.Component {
+class BestSellersLists extends React.Component {
 	componentDidMount() {
 		this.props.getBestSellersList();
 	}
@@ -15,4 +15,4 @@ class BestSellersList extends React.Component {
 	}
 }
 
-export default BestSellersList;
+export default BestSellersLists;

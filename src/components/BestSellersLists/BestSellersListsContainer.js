@@ -1,5 +1,5 @@
-import BestSellersList from './BestSellersList';
-import { getBestSellersList } from './../../actions/bestSellersList';
+import BestSellersList from './BestSellersLists';
+import { getBestSellersList } from '../../actions/bestSellersLists';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
