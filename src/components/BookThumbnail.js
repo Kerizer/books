@@ -11,10 +11,16 @@ const Container = styled.div`
 const ContainerInnerContent = styled.div`
 	width: 300px;
 	margin: 0 auto;
+	height: 100%;
+	display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 `;
 
 const BookImage = styled.img`
 	display: block;
+	margin: auto;
+	max-width: 100%;
 `;
 
 const BookTitle = styled.h5`
@@ -43,12 +49,14 @@ class BookThumbnail extends React.Component {
 		return <Container>
 			<ContainerInnerContent>
 				<BookImage src={this.props.book_image} alt="Book image" />
-				<BookTitle>{this.props.title}</BookTitle>
-				<BookDescription>{this.props.description}</BookDescription>
-				<BookActions>
-					<MoreLink to="">More</MoreLink>
-					<BuyBookLink href={this.props.amazon_product_url} target="_blank">Buy on Amazon</BuyBookLink>
-				</BookActions>
+				<div>
+					<BookTitle>{this.props.title}</BookTitle>
+					<BookDescription>{this.props.description}</BookDescription>
+					<BookActions>
+						<MoreLink to="">More</MoreLink>
+						<BuyBookLink href={this.props.amazon_product_url} target="_blank">Buy on Amazon</BuyBookLink>
+					</BookActions>
+				</div>
 			</ContainerInnerContent>
 		</Container>
 	}
