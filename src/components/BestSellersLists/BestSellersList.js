@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class BestSellersList extends React.Component {
 	componentDidMount() {
@@ -8,7 +9,7 @@ class BestSellersList extends React.Component {
 	render() {
 		return <div>
 			{this.props.bestSellersLists.map(item => <div key={item.list_name_encoded}>
-				<h5>{item.display_name}</h5>
+				<Link to={`list/${item.list_name_encoded}`}>{item.display_name}</Link>
 			</div>)}
 		</div>
 	}
