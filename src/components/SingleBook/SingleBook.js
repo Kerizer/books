@@ -18,7 +18,7 @@ class SingleBook extends React.Component {
 		return <div>
 
 			<div>
-				<img src={bookInfo.cover && bookInfo.cover.large} alt="Book thumbnail" />
+				<img src={bookInfo.covers.s} alt="Book thumbnail" />
 				<h4>{bookInfo.title}</h4>
 			</div>
 			<div>

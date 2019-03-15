@@ -16,7 +16,7 @@ const booksReviewesFailure = (error) => ({
 });
 
 export function getBookReviews(isbn) {
-	return async (dispatch, getState, api) => {
+	return async (dispatch, getState, {api}) => {
 		dispatch(booksReviewesRequest());
 		try {
 			let response = await api.get(`/reviews.json`, {

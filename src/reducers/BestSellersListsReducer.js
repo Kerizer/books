@@ -21,7 +21,7 @@ function BestSellersLists(state = initialState, data) {
 		case singleBestSellersListActionType.failure:
 			return {...state, isLoading: false}
 		case singleBestSellersListActionType.success:
-			return {...state, listInfo: {...state.listInfo, ...{[data.list]:data.results}}, isLoading: false}
+			return {...state, listInfo: {...state.listInfo, ...{[data.list]: { items: data.results, numResults: data.numResults}}}, isLoading: false}
 		default:
 			return state;
 	}

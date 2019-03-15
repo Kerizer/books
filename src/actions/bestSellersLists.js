@@ -15,7 +15,7 @@ const bestSellersListFailure = (error) => ({
 });
 
 export function getBestSellersList() {
-	return async (dispatch, getState, api) => {
+	return async (dispatch, getState, {api}) => {
 		dispatch(bestSellersListRequest());
 		let response = await api.get("lists/names.json");
 		if (response.status === 200 && response.statusText === "OK") {

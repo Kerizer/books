@@ -7,6 +7,7 @@ const singleBestSellersListRequest = () => ({
 const singleBellersListSuccess = (list, data) => ({
 	type: singleBestSellersListActionType.success,
 	results: data.results,
+	numResults: data.num_results,
 	list
 });
 
@@ -16,7 +17,7 @@ const singleBellersListFailure = (error) => ({
 });
 
 export function getSingleBestSellersList(list) {
-	return async (dispatch, getState, api) => {
+	return async (dispatch, getState, {api}) => {
 		dispatch(singleBestSellersListRequest());
 		let response = await api.get(`/lists/current/${list}.json`);
 		if (response.status === 200 && response.statusText === "OK") {

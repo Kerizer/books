@@ -22,6 +22,7 @@ class App extends Component {
 					<Route path="/" exact component={BestSellersList} />
 					<Route path="/list/:listNameEncoded" component={SingleBestSellersList} />
 					<Route path="/book/:isbn" component={SingleBook} />
+					{/* TODO: find a good api for searching books by isbn GoogleBooks and OpenLibrary only returns ~35% of books */}
 				</div>
 			</Router>
 		</div>
