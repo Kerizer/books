@@ -20,9 +20,8 @@ export function getBookInfo(isbn) {
 		dispatch(bookInfoRequest());
 		// NYT gives no possibility to fetch info about single book, using openlibrary here
 		try {
-			let response = await getters.getBookInfo({isbn});
+			let response = await getters.getBookInfo({isbn, service:'google'});
 			// if (response.status === 200) {
-				console.log(response);
 				dispatch(bookInfoSuccess(isbn, response));
 			// } else {
 				// dispatch(bookInfoFailure());

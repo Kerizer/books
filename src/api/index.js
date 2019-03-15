@@ -43,7 +43,11 @@ export const getters = {
 				let result;
 				switch (service) {
 					case 'google':
-						result = response.data.items[0];
+						// Google sometimes returns array of irrelevant books, need to check if this array contains book with our isbn
+						result = response.data.items.reduce( (acc, current) => {
+							let isIsbnMatch = current.volumeInfo.industryIdentifiers.filter(industryIdentifier => industryIdentifier.identifier === isbn).length;
+							return isIsbnMatch ? current : acc;
+						}, {});
 						return !!result ? {
 							title: result.volumeInfo.title,
 							description: result.volumeInfo.description,
