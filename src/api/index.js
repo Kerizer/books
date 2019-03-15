@@ -19,9 +19,7 @@ export const getters = {
 		} = params;
 
 		if (service === null) {
-			// let avaliableServices = services.filter(s => s.contains )
 			let leftServices = [];
-			console.log('excludedServices', excludedServices);
 			for (let i = 0; i < services.length; i++) {
 				if ( !excludedServices.includes(services[i]) ) {
 					leftServices = [...leftServices, services[i]]
@@ -32,11 +30,8 @@ export const getters = {
 				service = leftServices[0];
 			} else {
 				return {
-					title: "",
-					description: "",
-					covers: {
-						s: ""
-					}
+					error: "NotFound",
+					checkedServices: excludedServices,
 				};
 			}
 		}
@@ -71,7 +66,7 @@ export const getters = {
 							return getters.getBookInfo({...params, ...{excludedServices: [...excludedServices, 'google']}, service: null })
 						}
 						// Google sometimes returns array of irrelevant books, need to check if this array contains book with our isbn
-						result = response.data.item.reduce( (acc, current) => {
+						result = response.data.items.reduce( (acc, current) => {
 							let isIsbnMatch = current.volumeInfo.industryIdentifiers.filter(industryIdentifier => industryIdentifier.identifier === isbn).length;
 							return isIsbnMatch ? current : acc;
 						}, {});
@@ -96,7 +91,7 @@ export const getters = {
 				}
 			}
 		} catch(e) {
-			console.error(`Error while trying to fetch book from ${service} with parameters: ${getParameters}. Error: ${e}`);
+			console.error(`Error while trying to fetch book from ${service} with parameters: ${JSON.stringify(getParameters)}. Error: ${e}`);
 		}
 
 	},

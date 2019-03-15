@@ -13,7 +13,7 @@ class SingleBook extends React.Component {
 			return <div>Loading</div>
 		}
 		if (bookInfo.error === "NotFound") {
-			return <div>Can't find info about book with isbn {this.props.match.params.isbn} on Google Books</div>
+			return <div>Can't find info about book with isbn {this.props.match.params.isbn}. Checked on {bookInfo.checkedServices.join(', ')}</div>
 		} 
 		return <div>
 
