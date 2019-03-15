@@ -10,12 +10,36 @@ const api = axios.create({
 
 export const getters = {
 	getBookInfo: async (params) => {
+		const services = ['google', 'openLibrary'];
 		let { 
 			isbn,
 			// title,
 			service,
 			excludedServices = [],
 		} = params;
+
+		if (service === null) {
+			// let avaliableServices = services.filter(s => s.contains )
+			let leftServices = [];
+			console.log('excludedServices', excludedServices);
+			for (let i = 0; i < services.length; i++) {
+				if ( !excludedServices.includes(services[i]) ) {
+					leftServices = [...leftServices, services[i]]
+				}
+			}
+
+			if (leftServices.length) {
+				service = leftServices[0];
+			} else {
+				return {
+					title: "",
+					description: "",
+					covers: {
+						s: ""
+					}
+				};
+			}
+		}
 
 		let getParameters = {},
 			getURL = "";
@@ -43,8 +67,11 @@ export const getters = {
 				let result;
 				switch (service) {
 					case 'google':
+						if (response.data.totalItems === 0) {
+							return getters.getBookInfo({...params, ...{excludedServices: [...excludedServices, 'google']}, service: null })
+						}
 						// Google sometimes returns array of irrelevant books, need to check if this array contains book with our isbn
-						result = response.data.items.reduce( (acc, current) => {
+						result = response.data.item.reduce( (acc, current) => {
 							let isIsbnMatch = current.volumeInfo.industryIdentifiers.filter(industryIdentifier => industryIdentifier.identifier === isbn).length;
 							return isIsbnMatch ? current : acc;
 						}, {});
@@ -55,7 +82,7 @@ export const getters = {
 								s: result.volumeInfo.imageLinks.thumbnail
 							},
 								
-						} : {};
+						} : getters.getBookInfo({...params, ...{excludedServices: [...excludedServices, 'google']}, service: null });
 					case 'openLibrary':
 					default:
 						result = response.data[`ISBN${isbn}`];
@@ -65,7 +92,7 @@ export const getters = {
 							covers: {
 								s: result.cover.medium
 							},
-						} : {}
+						} : getters.getBookInfo({...params, ...{excludedServices: [...excludedServices, 'openLibrary']}, service: null });
 				}
 			}
 		} catch(e) {
