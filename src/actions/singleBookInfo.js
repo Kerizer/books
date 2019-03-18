@@ -18,15 +18,10 @@ const bookInfoFailure = (error) => ({
 export function getBookInfo(isbn) {
 	return async (dispatch, getState, {api, getters}) => {
 		dispatch(bookInfoRequest());
-		// NYT gives no possibility to fetch info about single book, using openlibrary here
-		try {
-			let response = await getters.getBookInfo({isbn, service:'google'});
-			// if (response.status === 200) {
-				dispatch(bookInfoSuccess(isbn, response));
-			// } else {
-				// dispatch(bookInfoFailure());
-			// }
-		} catch(e) {
+		let response = await getters.getBookInfo({isbn, service:'google'});
+		if (!response.error && response.error !== "NotFound") {
+			dispatch(bookInfoSuccess(isbn, response));
+		} else {
 			dispatch(bookInfoFailure());
 		}
 

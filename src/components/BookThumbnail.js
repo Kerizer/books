@@ -46,7 +46,6 @@ const BuyBookLink = styled.a`
 
 class BookThumbnail extends React.Component {
 	render() {
-		console.log(this.props);
 		return <Container>
 			<ContainerInnerContent>
 				<BookImage src={this.props.book_image} alt="Book image" />

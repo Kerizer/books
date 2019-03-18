@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components/macro';
+import SingleBookInfo from './SingleBookInfo';
+import SingleBookReviews from './SingleBookReviews';
 
 class SingleBook extends React.Component {
 	componentDidMount() {
@@ -17,15 +18,8 @@ class SingleBook extends React.Component {
 		} 
 		return <div>
 
-			<div>
-				<img src={bookInfo.covers.s} alt="Book thumbnail" />
-				<h4>{bookInfo.title}</h4>
-			</div>
-			<div>
-				Reviews: {reviews && reviews.map(review => <div key={review.uuid}>
-					<span>{review.byline}({review.publication_dt}): {review.summary}</span>
-				</div>)}
-			</div>
+			<SingleBookInfo bookInfo={bookInfo} />
+			{reviews && <SingleBookReviews reviews={reviews} />}
 		</div>
 	}
 };

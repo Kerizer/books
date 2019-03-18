@@ -92,6 +92,12 @@ export const getters = {
 			}
 		} catch(e) {
 			console.error(`Error while trying to fetch book from ${service} with parameters: ${JSON.stringify(getParameters)}. Error: ${e}`);
+			return {
+				error: 'UnknownError',
+				service,
+				getParameters,
+				e,
+			}
 		}
 
 	},
